@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { Upload, Image as ImageIcon, Loader2 } from 'lucide-react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import GlassCard from './GlassCard'
 
@@ -154,10 +155,13 @@ export default function UploadBox({
             className="space-y-4"
           >
             <div className="relative rounded-xl overflow-hidden bg-echo-navy-light/50 border border-echo-cyan/20">
-              <img
+              <Image
                 src={uploadedImage}
                 alt="Uploaded medical image"
+                width={800}
+                height={400}
                 className="w-full h-auto max-h-80 object-contain"
+                unoptimized
               />
               <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-echo-navy/80 border border-echo-cyan/30 text-[10px] font-bold text-echo-cyan uppercase tracking-wider backdrop-blur-sm">
                 Category: {categories.find(c => c.id === selectedImageType)?.label}

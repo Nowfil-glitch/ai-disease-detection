@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Layers } from 'lucide-react'
+import Image from 'next/image'
 
 interface HeatmapViewerProps {
   imageUrl: string
@@ -15,7 +16,7 @@ export default function HeatmapViewer({ imageUrl }: HeatmapViewerProps) {
   const generateHeatmap = () => {
     return (
       <div className="absolute inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             background: `radial-gradient(circle at 60% 45%, rgba(255, 0, 0, ${opacity}) 0%, rgba(255, 165, 0, ${opacity * 0.7}) 25%, rgba(255, 255, 0, ${opacity * 0.5}) 40%, transparent 70%)`,
@@ -44,10 +45,13 @@ export default function HeatmapViewer({ imageUrl }: HeatmapViewerProps) {
         transition={{ duration: 0.5 }}
         className="relative rounded-xl overflow-hidden bg-echo-gray-light dark:bg-echo-charcoal border border-echo-gray-mid/20 dark:border-echo-gray-dark"
       >
-        <img
+        <Image
           src={imageUrl}
           alt="Medical image with heatmap"
+          width={800}
+          height={600}
           className="w-full h-auto max-h-96 object-contain"
+          unoptimized
         />
         {generateHeatmap()}
       </motion.div>
