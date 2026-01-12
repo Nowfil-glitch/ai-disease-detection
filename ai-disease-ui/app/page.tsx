@@ -35,6 +35,7 @@ export default function Home() {
   const [consoleMessages, setConsoleMessages] = useState<string[]>([])
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null)
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'hi' | 'es' | 'fr' | 'te'>('en')
+  const [selectedImageType, setSelectedImageType] = useState<'chest_xray' | 'bone_xray' | 'skin_image'>('chest_xray')
   const [error, setError] = useState<string | null>(null)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [showScrollTop, setShowScrollTop] = useState(false)
@@ -127,6 +128,14 @@ export default function Home() {
     setAnalysisResult(null)
   }
 
+  const handleImageTypeChange = (type: 'chest_xray' | 'bone_xray' | 'skin_image') => {
+    setSelectedImageType(type)
+    // If we change type, we should probably reset results
+    setShowResults(false)
+    setAnalysisResult(null)
+    setConsoleMessages([])
+  }
+
   const addConsoleMessage = (message: string) => {
     setConsoleMessages(prev => [...prev, message])
   }
@@ -150,7 +159,7 @@ export default function Home() {
       // Prepare form data
       const formData = new FormData()
       formData.append('image', uploadedFile)
-      formData.append('image_type', 'chest_xray') // Default to chest_xray, can be made dynamic
+      formData.append('image_type', selectedImageType)
 
       addConsoleMessage('Uploading image to AI backend...')
       await new Promise(resolve => setTimeout(resolve, 300))
@@ -449,6 +458,8 @@ export default function Home() {
                 uploadedImage={uploadedImage}
                 onAnalyze={handleAnalyze}
                 isProcessing={isProcessing}
+                selectedImageType={selectedImageType}
+                onImageTypeChange={handleImageTypeChange}
               />
             </div>
           </motion.div>
