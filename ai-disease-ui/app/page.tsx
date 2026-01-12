@@ -156,7 +156,8 @@ export default function Home() {
       await new Promise(resolve => setTimeout(resolve, 300))
 
       // Call backend API
-      const response = await fetch('http://localhost:8000/api/analyze', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const response = await fetch(`${apiUrl}/api/analyze`, {
         method: 'POST',
         body: formData,
       })
