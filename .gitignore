@@ -1,0 +1,25 @@
+# Root level ignores
+
+# VS Code
+.vscode/
+
+# IntelliJ / JetBrains
+.idea/
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+from desktop.ini
+
+# Virtual Environment (if created at root)
+.venv/
+venv/
+env/
+
+# Local env files (if any at root)
+.env
+.env.local
+
+# Logs
+*.log
