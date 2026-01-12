@@ -240,7 +240,7 @@ export default function Home() {
             className="inline-block mb-4"
           >
             <span className="px-4 py-2 rounded-full text-sm font-semibold bg-echo-cyan/10 text-echo-cyan border border-echo-cyan/20">
-              ✨ KNAZ Tech
+              ✨ KRACK HEADS
             </span>
           </motion.div>
           <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 echo-gradient-text leading-tight">
@@ -679,7 +679,7 @@ export default function Home() {
                   <Brain className="w-6 h-6 text-echo-navy" />
                 </div>
                 <span className="font-display font-bold text-xl text-white">
-                  KNAZ Tech
+                  KRACK HEADS
                 </span>
               </div>
               <p className="text-sm text-echo-cyan-pale/70 mb-4">
@@ -776,10 +776,10 @@ export default function Home() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-sm text-echo-cyan-pale/70">
                   <Mail className="w-4 h-4 text-echo-cyan" />
-                  contact@knaztech.com
+                  contact@krackheads.com
                 </li>
                 <li className="text-sm text-echo-cyan-pale/70">
-                  KNAZ Tech Headquarters<br />
+                  KRACK HEADS Headquarters<br />
                   Technology Park, Innovation City
                 </li>
               </ul>
@@ -789,7 +789,7 @@ export default function Home() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-echo-cyan/20 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-echo-cyan-pale/60">
-              © 2024 KNAZ Tech. All rights reserved.
+              © 2026 KRACK HEADS. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm text-echo-cyan-pale/60">
               <a href="#" className="hover:text-echo-cyan transition-colors">
@@ -803,7 +803,7 @@ export default function Home() {
               </a>
             </div>
             <p className="text-sm text-echo-cyan-pale/60 flex items-center gap-1">
-              Made with <Heart className="w-4 h-4 text-echo-cyan fill-echo-cyan icon-pulse" /> by KNAZ Tech
+              Made with <Heart className="w-4 h-4 text-echo-cyan fill-echo-cyan icon-pulse" /> by KRACK HEADS
             </p>
           </div>
         </div>
