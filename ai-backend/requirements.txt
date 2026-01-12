@@ -1,0 +1,90 @@
+# AI Disease Detection Backend - Requirements
+# Compatible with Python 3.12.6
+# Last verified: January 2026
+# Medical AI Models Integrated
+
+# ============================================
+# Web Framework
+# ============================================
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+starlette==0.41.3
+
+# ============================================
+# Image Processing
+# ============================================
+pillow==11.1.0
+numpy==2.2.1
+opencv-python-headless==4.10.0.84
+scikit-image==0.24.0
+
+# ============================================
+# Deep Learning - PyTorch (Python 3.12 compatible)
+# ============================================
+torch==2.5.1
+torchvision==0.20.1
+
+# ============================================
+# Medical AI Models
+# ============================================
+# TorchXRayVision - Pre-trained chest X-ray models
+# Trained on: ChestX-ray14, CheXpert, PadChest, MIMIC-CXR, etc.
+# If installation fails, install manually: pip install torchxrayvision
+torchxrayvision
+
+# TIMM - PyTorch Image Models (for skin lesion models)
+timm==1.0.12
+
+# ============================================
+# Machine Learning
+# ============================================
+scikit-learn==1.6.0
+
+# ============================================
+# Translation
+# ============================================
+deep-translator==1.11.4
+beautifulsoup4==4.12.3
+
+# ============================================
+# Async file handling
+# ============================================
+aiofiles==24.1.0
+
+# ============================================
+# Authentication & Security
+# ============================================
+PyJWT==2.10.1
+cryptography==44.0.0
+
+# ============================================
+# Environment & Configuration
+# ============================================
+python-dotenv==1.0.1
+
+# ============================================
+# Rate Limiting
+# ============================================
+slowapi==0.1.9
+limits==3.14.0
+
+# ============================================
+# Redis & Celery (optional - for async tasks)
+# ============================================
+redis==5.2.1
+celery==5.4.0
+
+# ============================================
+# HTTP Clients
+# ============================================
+httpx==0.28.1
+requests==2.32.3
+
+# ============================================
+# Utilities
+# ============================================
+tqdm==4.67.1
+pandas==2.2.3

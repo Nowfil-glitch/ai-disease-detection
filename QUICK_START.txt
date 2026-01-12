@@ -1,0 +1,79 @@
+================================================================================
+     AI DISEASE DETECTION WEBSITE - QUICK START GUIDE
+================================================================================
+
+BEFORE YOU START - INSTALL THESE:
+----------------------------------
+1. Python 3.9+    Download: https://www.python.org/downloads/
+2. Node.js 18+    Download: https://nodejs.org/
+
+IMPORTANT: Check "Add Python to PATH" during Python installation!
+
+================================================================================
+STEP-BY-STEP INSTRUCTIONS
+================================================================================
+
+STEP 1: Setup Backend (Command Prompt #1)
+------------------------------------------
+cd ai-backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python create_demo_models.py
+python -m app.main
+
+Keep this window open! Backend is now running on http://localhost:8000
+
+STEP 2: Setup Frontend (NEW Command Prompt #2)
+-----------------------------------------------
+cd ai-disease-ui
+npm install
+npm run dev
+
+Keep this window open! Frontend is now running on http://localhost:3000
+
+STEP 3: Open Website
+--------------------
+Open your browser: http://localhost:3000
+
+Upload an image and click "Analyze Image"!
+
+================================================================================
+TO STOP THE WEBSITE
+================================================================================
+Press Ctrl+C in both Command Prompt windows
+
+================================================================================
+NEXT TIME (After First Setup)
+================================================================================
+Terminal 1:
+  cd ai-backend
+  venv\Scripts\activate
+  python -m app.main
+
+Terminal 2:
+  cd ai-disease-ui
+  npm run dev
+
+Open: http://localhost:3000
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+"Python was not found"
+  → Install Python: https://www.python.org/downloads/
+  → Check "Add Python to PATH" during installation
+  → Restart Command Prompt
+
+"node: command not found"  
+  → Install Node.js: https://nodejs.org/
+  → Restart Command Prompt
+
+Port already in use:
+  netstat -ano | findstr :8000
+  taskkill /F /PID <number>
+
+================================================================================
+NEED HELP? See RUN_WEBSITE.md for detailed instructions
+================================================================================

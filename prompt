@@ -1,0 +1,70 @@
+Enhance the AI Disease Detection platform so that after a user uploads a medical image (X-ray, skin, bone, etc.) and the AI analyzes it, the system provides:
+
+A detailed description of the analysis
+
+Explains what the AI detected in the image
+
+Provides context about the disease/condition
+
+Consultation recommendation
+
+Suggests which type of doctor/specialist to consult
+
+Provides next steps or precautionary advice
+
+Optional multi-language support
+
+Translate the description and recommendations into multiple languages
+
+Functional Requirements
+
+When Analyze Image is clicked:
+
+AI model runs and outputs prediction/confidence
+
+A text module generates a detailed description of the prediction
+
+A recommended action is generated (doctor consultation, follow-up steps)
+
+Return as JSON to frontend:
+
+{
+  "diagnosis": "Detected Condition Name",
+  "confidence": 0.92,
+  "description": "Detailed textual explanation of the analysis of the image.",
+  "recommended_action": "Consult a specialist. Follow prescribed precautions.",
+  "translations": {
+    "en": "English version of description and recommendation",
+    "hi": "Hindi version",
+    "es": "Spanish version"
+  }
+}
+
+
+Frontend displays this description + recommendation in a visually clear card (GlassCard or ResultCard).
+
+Include language selector to switch translations.
+
+Update the AI console / animation to indicate that the analysis is generating the textual explanation.
+
+Implementation Notes
+
+Use pre-defined templates or GPT/AI text generation to create readable and informative descriptions.
+
+Include educational disclaimers: "This is for informational purposes only. Consult a medical professional for diagnosis."
+
+Ensure JSON format is consistent for easy frontend integration.
+
+💡 End Result:
+
+Users upload an image → AI analyzes it → they see:
+
+Confidence/probability
+
+Heatmap overlay
+
+Textual analysis of what the AI detected
+
+Consultation recommendation
+
+Translations in multiple languages
