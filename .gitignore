@@ -25,6 +25,9 @@ env/
 *.log
 
 # Data and Models
+models/
+uploads/
+static/
 ai-backend/models/
 ai-backend/uploads/
 ai-backend/static/
