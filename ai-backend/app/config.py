@@ -15,14 +15,15 @@ class Settings(BaseSettings):
     # Base URL for static files (Heatmaps)
     BASE_URL: str = "http://localhost:8000"
     
-    # File Upload
+    # Paths
+    BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     MAX_FILE_SIZE: int = 10485760  # 10MB
     ALLOWED_EXTENSIONS: List[str] = ["jpg", "jpeg", "png"]
-    UPLOAD_DIR: str = "uploads"
+    UPLOAD_DIR: str = os.path.join(BASE_DIR, "uploads")
     
     # AI Models
-    MODEL_PATH: str = "./models"
-    HEATMAP_OUTPUT_PATH: str = "./static/heatmaps"
+    MODEL_PATH: str = os.path.join(BASE_DIR, "models")
+    HEATMAP_OUTPUT_PATH: str = os.path.join(BASE_DIR, "static", "heatmaps")
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"

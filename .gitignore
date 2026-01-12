@@ -25,13 +25,13 @@ env/
 *.log
 
 # Data and Models
-models/
-uploads/
-static/
-ai-backend/models/
-ai-backend/uploads/
-ai-backend/static/
-ai-backend/logs/
+/models/
+/uploads/
+/static/
+/ai-backend/models/
+/ai-backend/uploads/
+/ai-backend/static/
+/ai-backend/logs/
 
 # Node modules
 node_modules/

@@ -152,13 +152,13 @@ class ChestXRayModel:
         )
         
         if os.path.exists(model_path):
-            logger.info(f"Loading trained weights from {model_path}")
+            logger.info(f"Loading trained chest model from: {os.path.abspath(model_path)}")
             self.model.load_state_dict(
                 torch.load(model_path, map_location=self.device)
             )
         else:
-            logger.warning("No trained chest model found. Using ImageNet weights with random head.")
-            logger.warning("Predictions may not be accurate. Consider training on chest X-ray dataset.")
+            logger.warning(f"No trained chest model found at: {os.path.abspath(model_path)}")
+            logger.warning("Using ImageNet weights with random head.")
         
         self.model = self.model.to(self.device)
         self.model.eval()
@@ -315,7 +315,7 @@ class SkinLesionModel:
         
         if os.path.exists(model_path):
             # Load custom trained model
-            logger.info(f"Loading trained model from {model_path}")
+            logger.info(f"Loading trained skin model from: {os.path.abspath(model_path)}")
             if TIMM_AVAILABLE:
                 self.model = timm.create_model(
                     'efficientnet_b3', 
@@ -336,7 +336,7 @@ class SkinLesionModel:
             # Use pre-trained ImageNet model with modified head
             # NOTE: This is a fallback - not as accurate as ISIC-trained model
             logger.warning(
-                f"No trained skin model found at {model_path}. "
+                f"No trained skin model found at: {os.path.abspath(model_path)}. "
                 "Using ImageNet pre-trained weights (less accurate)."
             )
             if TIMM_AVAILABLE:
@@ -461,13 +461,13 @@ class BoneXRayModel:
         self.model.fc = nn.Linear(self.model.fc.in_features, self.num_classes)
         
         if os.path.exists(model_path):
-            logger.info(f"Loading trained model from {model_path}")
+            logger.info(f"Loading trained bone model from: {os.path.abspath(model_path)}")
             self.model.load_state_dict(
                 torch.load(model_path, map_location=self.device)
             )
         else:
             logger.warning(
-                f"No trained bone model found at {model_path}. "
+                f"No trained bone model found at: {os.path.abspath(model_path)}. "
                 "Using ImageNet pre-trained weights."
             )
             # Load pretrained backbone
