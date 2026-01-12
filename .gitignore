@@ -23,3 +23,12 @@ env/
 
 # Logs
 *.log
+
+# Data and Models
+models/
+uploads/
+static/
+
+# Node modules
+node_modules/
+.next/

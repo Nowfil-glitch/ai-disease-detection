@@ -228,7 +228,7 @@ async def analyze_image(
         cv2.imwrite(heatmap_path, cv2.cvtColor(overlay, cv2.COLOR_RGB2BGR))
         
         # Generate heatmap URL
-        heatmap_url = f"http://localhost:{settings.PORT}/static/heatmaps/{heatmap_filename}"
+        heatmap_url = f"{settings.BASE_URL}/static/heatmaps/{heatmap_filename}"
         
         # Translate diagnosis
         try:

@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
     
+    # Base URL for static files (Heatmaps)
+    BASE_URL: str = "http://localhost:8000"
+    
     # File Upload
     MAX_FILE_SIZE: int = 10485760  # 10MB
     ALLOWED_EXTENSIONS: List[str] = ["jpg", "jpeg", "png"]
