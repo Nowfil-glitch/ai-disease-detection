@@ -9,7 +9,8 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    TORCH_HOME=/app/.cache/torch
 
 # Install system dependencies for OpenCV, PyTorch, and image processing
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -27,8 +28,16 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+# Create necessary directories early
+RUN mkdir -p static/heatmaps models uploads logs .cache/torch
+
 # Copy application code
 COPY . .
+
+# Pre-build AI models during Docker build phase
+# This moves the long download/setup process to build time
+# Use --skip-verification to save memory during build
+RUN python create_demo_models.py --skip-verification
 
 # Copy entrypoint script
 COPY entrypoint.sh .

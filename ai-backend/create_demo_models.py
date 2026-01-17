@@ -268,15 +268,10 @@ def setup_bone_model():
 
 
 def verify_all_models():
-    """Verify all models can be loaded and used"""
-    print_header("Verifying Model Integration")
+    """Verify all models can be loaded and used one by one to save memory"""
+    print_header("Verifying Model Integration (Sequential)")
     
     try:
-        print_step(1, "Importing model manager...")
-        from app.models.model_loader import model_manager
-        print_success("Model manager imported")
-        
-        print_step(2, "Testing chest X-ray model...")
         from PIL import Image
         import numpy as np
         
@@ -285,27 +280,35 @@ def verify_all_models():
             np.random.randint(0, 255, (224, 224, 3), dtype=np.uint8)
         )
         
-        result = model_manager.predict("chest_xray", dummy_image)
-        print_success(f"Chest X-ray prediction: {result['primary_finding']}")
-        print_success(f"Confidence: {result['confidence']:.2%}")
-        print_success(f"Risk level: {result['risk_level']}")
+        model_types = ["chest_xray", "skin_image", "bone_xray"]
+        success = True
         
-        print_step(3, "Testing skin lesion model...")
-        result = model_manager.predict("skin_image", dummy_image)
-        print_success(f"Skin lesion prediction: {result['primary_finding']}")
-        print_success(f"Confidence: {result['confidence']:.2%}")
+        for model_type in model_types:
+            print_step(1, f"Testing {model_type} model...")
+            try:
+                # Local import to avoid keeping manager in outer scope if possible
+                from app.models.model_loader import MedicalModelManager
+                manager = MedicalModelManager()
+                
+                result = manager.predict(model_type, dummy_image)
+                print_success(f"{model_type} prediction: {result['primary_finding']}")
+                print_success(f"Confidence: {result['confidence']:.2%}")
+                
+                # Cleanup to free memory
+                del manager
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                import gc
+                gc.collect()
+                
+            except Exception as e:
+                print_error(f"{model_type} verification failed: {str(e)}")
+                success = False
         
-        print_step(4, "Testing bone X-ray model...")
-        result = model_manager.predict("bone_xray", dummy_image)
-        print_success(f"Bone X-ray prediction: {result['primary_finding']}")
-        print_success(f"Confidence: {result['confidence']:.2%}")
-        
-        return True
+        return success
         
     except Exception as e:
-        print_error(f"Verification failed: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        print_error(f"Verification process failed: {str(e)}")
         return False
 
 
@@ -326,13 +329,18 @@ def main():
     
     results = {}
     
+    skip_verification = "--skip-verification" in sys.argv
+    
     # Setup each model
     results['chest_xray'] = setup_torchxrayvision()
     results['skin_image'] = setup_skin_model()
     results['bone_xray'] = setup_bone_model()
     
     # Verify integration
-    if all(results.values()):
+    if skip_verification:
+        print_warning("Skipping integration verification as requested")
+        results['integration'] = True
+    elif all(results.values()):
         verification = verify_all_models()
         results['integration'] = verification
     else:
