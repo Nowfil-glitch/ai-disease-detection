@@ -13,7 +13,8 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
     
     # Base URL for static files (Heatmaps)
-    BASE_URL: str = "http://localhost:8000"
+    # Automatically uses RAILWAY_PUBLIC_DOMAIN if available
+    BASE_URL: str = f"https://{os.environ.get('RAILWAY_PUBLIC_DOMAIN', 'localhost:8000')}" if os.environ.get('RAILWAY_PUBLIC_DOMAIN') else "http://localhost:8000"
     
     # Paths
     BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
