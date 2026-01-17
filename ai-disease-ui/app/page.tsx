@@ -172,8 +172,19 @@ export default function Home() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.detail || 'Analysis failed')
+        let errorMessage = 'Analysis failed'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.detail || errorMessage
+        } catch {
+          // Response body might be empty (CORS block or server error)
+          if (response.status === 0) {
+            errorMessage = 'Cannot connect to server. Check if CORS is configured correctly.'
+          } else {
+            errorMessage = `Server error: ${response.status} ${response.statusText}`
+          }
+        }
+        throw new Error(errorMessage)
       }
 
       addConsoleMessage('Processing image data...')
@@ -182,7 +193,12 @@ export default function Home() {
       addConsoleMessage('Running deep learning inference...')
       await new Promise(resolve => setTimeout(resolve, 300))
 
-      const result: AnalysisResult = await response.json()
+      let result: AnalysisResult
+      try {
+        result = await response.json()
+      } catch {
+        throw new Error('Invalid response from server. The server may be restarting.')
+      }
 
       addConsoleMessage('Analyzing image features...')
       await new Promise(resolve => setTimeout(resolve, 300))
