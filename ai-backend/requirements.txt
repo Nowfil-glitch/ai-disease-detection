@@ -1,7 +1,7 @@
-# AI Disease Detection Backend - Requirements
+# AI Disease Detection Backend - Requirements (Optimized for Docker)
 # Compatible with Python 3.12.6
 # Last verified: January 2026
-# Medical AI Models Integrated
+# Medical AI Models Integrated - CPU-only for smaller image size
 
 # ============================================
 # Web Framework
@@ -22,17 +22,16 @@ opencv-python-headless==4.10.0.84
 scikit-image==0.24.0
 
 # ============================================
-# Deep Learning - PyTorch (Python 3.12 compatible)
+# Deep Learning - PyTorch CPU-only (smaller image)
 # ============================================
-torch==2.5.1
-torchvision==0.20.1
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
 
 # ============================================
 # Medical AI Models
 # ============================================
 # TorchXRayVision - Pre-trained chest X-ray models
-# Trained on: ChestX-ray14, CheXpert, PadChest, MIMIC-CXR, etc.
-# If installation fails, install manually: pip install torchxrayvision
 torchxrayvision
 
 # TIMM - PyTorch Image Models (for skin lesion models)
@@ -72,12 +71,6 @@ slowapi==0.1.9
 limits==3.14.0
 
 # ============================================
-# Redis & Celery (optional - for async tasks)
-# ============================================
-redis==5.2.1
-celery==5.4.0
-
-# ============================================
 # HTTP Clients
 # ============================================
 httpx==0.28.1
@@ -87,4 +80,3 @@ requests==2.32.3
 # Utilities
 # ============================================
 tqdm==4.67.1
-pandas==2.2.3
